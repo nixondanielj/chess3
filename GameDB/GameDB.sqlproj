@@ -7,7 +7,7 @@
     <Name>GameDB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{58ab97a3-84f8-43fb-b4d7-883fad7497ed}</ProjectGuid>
+    <ProjectGuid>{b00b70b7-b1cd-4f49-a433-d31509fe1ebb}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
