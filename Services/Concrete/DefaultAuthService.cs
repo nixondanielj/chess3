@@ -11,16 +11,59 @@ namespace Services.Concrete
 {
     public class DefaultAuthService : IAuthorizationService
     {
-        public AuthenticationVM Authenticate(string key)
+        public AuthenticationVM Authenticate(AuthenticationFM credentials)
         {
-            using (var uow = new UnitOfWork())
+            AuthenticationVM vm = null;
+            if (credentials.Key != null)
             {
+                vm = AuthByKey(credentials.Key);
             }
+            else if (credentials.Email != null && credentials.Password != null)
+            {
+                vm = AuthByLogin(credentials.Email, credentials.Password);
+            }
+            return vm;
         }
 
-        public string Authenticate(AuthenticationVM model)
+        private AuthenticationVM AuthByLogin(string email, string password)
         {
-            return "a";
+            AuthenticationVM vm = null;
+            using (var uow = new UnitOfWork())
+            {
+                var user = uow.UserRepository.GetByEmail(email)
+                    .SingleOrDefault(u=>u.Password == password);
+                if (user != null)
+                {
+                    Token token = CreateToken(user);
+                    vm = new AuthenticationVM();
+                    vm.Key = token.Key;
+                    vm.UserId = user.Id;
+                }
+            }
+            return vm;
+        }
+
+        private Token CreateToken(User user)
+        {
+            Token token = new Token();
+            token.Key = Guid.NewGuid().ToString();
+            token.UserId = user.Id;
+            using (var uow = new UnitOfWork())
+            {
+                uow.TokenRepository.Create(token);
+            }
+            return token;
+        }
+
+        private AuthenticationVM AuthByKey(string key)
+        {
+            AuthenticationVM vm = null;
+            using (var uow = new UnitOfWork())
+            {
+                Token token = uow.TokenRepository.GetByKey(key).SingleOrDefault();
+                if()
+            }
+            return vm;
         }
     }
 }

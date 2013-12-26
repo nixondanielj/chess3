@@ -40,7 +40,14 @@ namespace DataAccess.Model
         public DateTime TimeMade { get; set; }
         public string Value { get; set; }
     }
-	
+
+    public partial class Token
+    {
+        public int UserId { get; set; }
+        public DateTime Issued { get; set; }
+        public string Key { get; set; }
+    }
 
 }
+
 

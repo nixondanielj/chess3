@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Services.Models
 {
-    public class AuthenticationVM
+    public class AuthenticationFM
     {
-        public int UserId { get; set; }
         public string Key { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

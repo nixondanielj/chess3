@@ -66,6 +66,19 @@ namespace DataAccess
 
     }
 
+    public class TokenMapper : Mapper<Token>
+    {
+        public override Token Map(SqlDataReader reader)
+        {
+            var model = new Token();
+            model.UserId = ToInt(reader["UserId"]);
+            model.Issued = ToDateTime(reader["Issued"]);
+            model.Key = ToString(reader["Key"]);
+            return model;
+        }
+
+    }
+
     public partial class UserRepository : Repository<User>
     {
         internal UserRepository(SqlConnection connection)
@@ -148,6 +161,11 @@ namespace DataAccess
         public virtual User GetByMove(Move model)
         {
             return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p JOIN Moves f ON p.Id = f.UserId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
+        }
+
+        public virtual User GetByToken(Token model)
+        {
+            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p JOIN Tokens f ON p.Id = f.UserId WHERE f.Key = @Key", new SqlParameter("@Key", model.Key)).SingleOrDefault();
         }
 
         public virtual List<User> GetByGame(Game model)
@@ -489,6 +507,79 @@ namespace DataAccess
 
     }
 
+    public partial class TokenRepository : Repository<Token>
+    {
+        internal TokenRepository(SqlConnection connection)
+            : base(connection, new TokenMapper())
+        { }
+        public virtual void Create(Token model)
+        {
+            string text = "INSERT INTO Tokens ([UserId], [Issued]) VALUES(@UserId, @Issued)";
+            ExecuteParamNonQuery(text, new SqlParameter("@UserId", model.UserId), new SqlParameter("@Issued", model.Issued));
+        }
+
+        public virtual List<Token> GetByUserId(int val)
+        {
+            IEnumerable<Token> results;
+            results = ExecuteParamQuery("SELECT t.[UserId], t.[Issued], t.[Key] FROM Tokens t WHERE t.UserId = @UserId", new SqlParameter("@UserId", val));
+            return results.ToList();
+        }
+
+        public virtual List<Token> GetByIssued(DateTime val)
+        {
+            IEnumerable<Token> results;
+            results = ExecuteParamQuery("SELECT t.[UserId], t.[Issued], t.[Key] FROM Tokens t WHERE t.Issued = @Issued", new SqlParameter("@Issued", val));
+            return results.ToList();
+        }
+
+        public virtual List<Token> GetByKey(string val)
+        {
+            IEnumerable<Token> results;
+            results = ExecuteParamQuery("SELECT t.[UserId], t.[Issued], t.[Key] FROM Tokens t WHERE t.Key = @Key", new SqlParameter("@Key", val));
+            return results.ToList();
+        }
+
+        public virtual List<Token> CustomGet(string where)
+        {
+            return ExecuteQuery("SELECT t.[UserId], t.[Issued], t.[Key] FROM Tokens t WHERE " + where).ToList();
+        }
+
+        public virtual IEnumerable<Token> GetAll()
+        {
+            return ExecuteQuery("SELECT p.[UserId], p.[Issued], p.[Key] FROM Tokens p");
+        }
+
+        public virtual void Delete(string id)
+        {
+            ExecuteParamNonQuery("DELETE FROM Tokens WHERE Key = @Key", new SqlParameter("@Key", id));
+        }
+
+        public virtual void Delete(Token model)
+        {
+            Delete(model.Key);
+        }
+
+        public virtual void Update(Token model)
+        {
+            var sparams = new SqlParameter[3];
+            sparams[0] = new SqlParameter("UserId", model.UserId);
+            sparams[1] = new SqlParameter("Issued", model.Issued);
+            sparams[2] = new SqlParameter("@Key", model.Key);
+            ExecuteParamNonQuery("UPDATE Tokens SET [UserId] = @UserId, [Issued] = @Issued WHERE [Key] = @Key", sparams);
+        }
+
+        public virtual List<Token> GetByUser(User model)
+        {
+            return ExecuteParamQuery("SELECT p.[UserId], p.[Issued], p.[Key] FROM Tokens p WHERE UserId = @UserId", new SqlParameter("@UserId", model.Id)).ToList();
+        }
+
+        public virtual void SetRelationship(User primary, Token foreign)
+        {
+            ExecuteParamNonQuery("UPDATE Tokens SET UserId = @Id WHERE Key = @Key", new SqlParameter("@Id", primary.Id), new SqlParameter("@Key", foreign.Key));
+        }
+
+    }
+
 
     public abstract partial class Repository<T>
     {
@@ -736,7 +827,7 @@ namespace DataAccess
         protected SqlConnection connection;
         public UnitOfWork()
         {
-            connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=GameDB; Integrated Security = SSPI;");
+            connection = new SqlConnection(@"Data Source = .\SQLEXPRESS; Initial Catalog = GameDB; Integrated Security = SSPI;");
             connection.Open();
         }
 
@@ -777,6 +868,15 @@ namespace DataAccess
             get
             {
                 return new MoveRepository(connection);
+            }
+
+        }
+
+        public virtual TokenRepository TokenRepository
+        {
+            get
+            {
+                return new TokenRepository(connection);
             }
 
         }
