@@ -54,3 +54,8 @@ CREATE TABLE Tokens
 	Issued smalldatetime not null,
 	UserId int not null foreign key references Users(Id)
 )
+
+INSERT INTO Users VALUES('nixon.daniel.j@gmail.com', 'password', CURRENT_TIMESTAMP)
+INSERT INTO Tokens VALUES('a', CURRENT_TIMESTAMP, (SELECT Id 
+												   FROM Users 
+												   WHERE Email='nixon.daniel.j@gmail.com'))
