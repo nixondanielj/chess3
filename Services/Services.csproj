@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concretions\ChessService.cs" />
+    <Compile Include="IBoardBuilder.cs" />
     <Compile Include="IGameService.cs" />
     <Compile Include="Models\GameStateVM.cs" />
     <Compile Include="Models\MoveFM.cs" />
@@ -57,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{550aea75-af87-4f30-92ae-a420d85b2bdb}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
