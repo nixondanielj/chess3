@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concretions\ChessService.cs" />
     <Compile Include="DIModule.cs" />
+    <Compile Include="IGameService.cs" />
+    <Compile Include="Models\GameStateVM.cs" />
+    <Compile Include="Models\MoveFM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
