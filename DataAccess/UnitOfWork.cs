@@ -23,7 +23,7 @@ namespace DataAccess
 
         public void Dispose()
         {
-
+            db.SaveChanges();
             db.Dispose();
         }
     }
