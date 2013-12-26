@@ -47,3 +47,10 @@ CREATE TABLE Moves
 	UserId int not null foreign key references Users(Id),
 	GameId int not null foreign key references Games(Id)
 )
+
+CREATE TABLE Tokens
+(
+	[Key] varchar(255) primary key not null,
+	Issued smalldatetime not null,
+	UserId int not null foreign key references Users(Id)
+)

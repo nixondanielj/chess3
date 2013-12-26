@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Services.Concrete
 {
-    public class BadAuthenticator : IAuthorizationService
+    public class DefaultAuthService : IAuthorizationService
     {
-        public bool Authenticate(string key)
+        public int Authenticate(string key)
         {
-            throw new NotImplementedException();
+
         }
 
         public string Authenticate(string email, string password)
         {
-            throw new NotImplementedException();
+            return "a";
         }
     }
 }
