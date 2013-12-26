@@ -48,15 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chess\ChessBoard.cs" />
-    <Compile Include="Chess\ChessBoardBuilder.cs" />
-    <Compile Include="Chess\ChessService.cs" />
-    <Compile Include="IBoardBuilder.cs" />
-    <Compile Include="IGameService.cs" />
-    <Compile Include="Models\GameStateVM.cs" />
-    <Compile Include="Models\MoveFM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -67,9 +59,7 @@
       <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Concretions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
