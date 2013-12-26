@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Model;
 
-namespace Services.Models
+namespace Services
 {
-    public class MoveFM
+    interface IBoardBuilder
     {
-        public string Value { get; set; }
+        object BuildBoard(IEnumerable<Move> moves);
     }
 }

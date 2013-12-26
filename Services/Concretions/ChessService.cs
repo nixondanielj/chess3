@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Services.Models;
-using DataAccess.Models;
+using DataAccess.Model;
+using DataAccess;
 
 namespace Services.Concretions
 {
@@ -14,15 +15,19 @@ namespace Services.Concretions
         public GameStateVM GetGame(int gameId, int playerId)
         {
             GameStateVM vm = new GameStateVM();
-            var game = this.UOW.GetRepository<Game>().Get(g => g.Id == gameId).SingleOrDefault();
-            vm.IsRequestingClientsTurn = (game.TurnPlayer.Id == playerId);
+            Game game;
+            using (var uow = new UnitOfWork())
+            {
+                game = uow.GameRepository.GetById(gameId).SingleOrDefault();
+            }
+            vm.IsRequestingClientsTurn = (game.TurnPlayerId == playerId);
             vm.Board = null;
             return vm;
         }
 
-        public void Move(Models.MoveFM move)
+        public void Move(MoveFM move)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -11,12 +11,10 @@ namespace Services
     abstract class Service
     {
         protected ILogger Log { get; set; }
-        protected UnitOfWork UOW { get; set; }
 
-        public Service(ILogger log, UnitOfWork uow)
+        public Service(ILogger log)
         {
             this.Log = log;
-            this.UOW = uow;
         }
     }
 }
