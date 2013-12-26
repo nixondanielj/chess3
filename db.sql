@@ -11,6 +11,7 @@ CREATE TABLE Users
 (
 	Id int primary key identity,
 	Email varchar(50) not null,
+	Password varchar(50) not null,
 	Created smalldatetime not null
 )
 
