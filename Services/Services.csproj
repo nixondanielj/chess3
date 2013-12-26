@@ -48,6 +48,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\DefaultAuthService.cs" />
+    <Compile Include="ExpiredAuthenticationException.cs" />
+    <Compile Include="IAuthorizationService.cs" />
+    <Compile Include="Models\AuthenticationFM.cs" />
+    <Compile Include="Models\AuthenticationVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +62,10 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{550aea75-af87-4f30-92ae-a420d85b2bdb}</Project>
       <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{4406c44f-1b80-48b2-a15e-6b943a6e26dd}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
