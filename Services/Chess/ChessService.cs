@@ -7,7 +7,7 @@ using Services.Models;
 using DataAccess.Model;
 using DataAccess;
 
-namespace Services.Concretions
+namespace Services.Chess
 {
     public class ChessService : Service, IGameService
     {
@@ -25,9 +25,22 @@ namespace Services.Concretions
             return vm;
         }
 
+        public void CreateGame(int playerId)
+        {
+
+        }
+
         public void Move(MoveFM move)
         {
-            
+            if (ValidateMove(move))
+            {
+
+            }
+        }
+
+        private bool ValidateMove(MoveFM move)
+        {
+            throw new NotImplementedException();
         }
     }
 }
