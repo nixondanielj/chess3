@@ -16,6 +16,7 @@ namespace DataAccess
             model.Id = ToInt(reader["Id"]);
             model.Created = ToDateTime(reader["Created"]);
             model.Email = ToString(reader["Email"]);
+            model.Password = ToString(reader["Password"]);
             return model;
         }
 
@@ -72,39 +73,46 @@ namespace DataAccess
         { }
         public virtual void Create(User model)
         {
-            string text = "INSERT INTO Users ([Created], [Email]) VALUES(@Created, @Email)";
-            ExecuteParamNonQuery(text, new SqlParameter("@Created", model.Created), new SqlParameter("@Email", model.Email ?? (object)DBNull.Value));
+            string text = "INSERT INTO Users ([Created], [Email], [Password]) VALUES(@Created, @Email, @Password)";
+            ExecuteParamNonQuery(text, new SqlParameter("@Created", model.Created), new SqlParameter("@Email", model.Email ?? (object)DBNull.Value), new SqlParameter("@Password", model.Password ?? (object)DBNull.Value));
         }
 
         public virtual List<User> GetById(int val)
         {
             IEnumerable<User> results;
-            results = ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email] FROM Users t WHERE t.Id = @Id", new SqlParameter("@Id", val));
+            results = ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email], t.[Password] FROM Users t WHERE t.Id = @Id", new SqlParameter("@Id", val));
             return results.ToList();
         }
 
         public virtual List<User> GetByCreated(DateTime val)
         {
             IEnumerable<User> results;
-            results = ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email] FROM Users t WHERE t.Created = @Created", new SqlParameter("@Created", val));
+            results = ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email], t.[Password] FROM Users t WHERE t.Created = @Created", new SqlParameter("@Created", val));
             return results.ToList();
         }
 
         public virtual List<User> GetByEmail(string val)
         {
             IEnumerable<User> results;
-            results = ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email] FROM Users t WHERE t.Email = @Email", new SqlParameter("@Email", val));
+            results = ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email], t.[Password] FROM Users t WHERE t.Email = @Email", new SqlParameter("@Email", val));
+            return results.ToList();
+        }
+
+        public virtual List<User> GetByPassword(string val)
+        {
+            IEnumerable<User> results;
+            results = ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email], t.[Password] FROM Users t WHERE t.Password = @Password", new SqlParameter("@Password", val));
             return results.ToList();
         }
 
         public virtual List<User> CustomGet(string where)
         {
-            return ExecuteQuery("SELECT t.[Id], t.[Created], t.[Email] FROM Users t WHERE " + where).ToList();
+            return ExecuteQuery("SELECT t.[Id], t.[Created], t.[Email], t.[Password] FROM Users t WHERE " + where).ToList();
         }
 
         public virtual IEnumerable<User> GetAll()
         {
-            return ExecuteQuery("SELECT p.[Id], p.[Created], p.[Email] FROM Users p");
+            return ExecuteQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p");
         }
 
         public virtual void Delete(int id)
@@ -119,31 +127,32 @@ namespace DataAccess
 
         public virtual void Update(User model)
         {
-            var sparams = new SqlParameter[3];
+            var sparams = new SqlParameter[4];
             sparams[0] = new SqlParameter("Created", model.Created);
             sparams[1] = new SqlParameter("Email", model.Email ?? (object)DBNull.Value);
-            sparams[2] = new SqlParameter("@Id", model.Id);
-            ExecuteParamNonQuery("UPDATE Users SET [Created] = @Created, [Email] = @Email WHERE [Id] = @Id", sparams);
+            sparams[2] = new SqlParameter("Password", model.Password ?? (object)DBNull.Value);
+            sparams[3] = new SqlParameter("@Id", model.Id);
+            ExecuteParamNonQuery("UPDATE Users SET [Created] = @Created, [Email] = @Email, [Password] = @Password WHERE [Id] = @Id", sparams);
         }
 
         public virtual User GetByGame(Game model)
         {
-            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email] FROM Users p JOIN Games f ON p.Id = f.TurnPlayerId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
+            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p JOIN Games f ON p.Id = f.TurnPlayerId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
         }
 
         public virtual User GetByGame(Game model)
         {
-            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email] FROM Users p JOIN Games f ON p.Id = f.TurnPlayerId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
+            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p JOIN Games f ON p.Id = f.TurnPlayerId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
         }
 
         public virtual User GetByMove(Move model)
         {
-            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email] FROM Users p JOIN Moves f ON p.Id = f.UserId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
+            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p JOIN Moves f ON p.Id = f.UserId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
         }
 
         public virtual List<User> GetByGame(Game model)
         {
-            return ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email] FROM Users t JOIN GamesUsers j ON t.Id = j.UserId WHERE j.GameId = @Id", new SqlParameter("@Id", model.Id)).ToList();
+            return ExecuteParamQuery("SELECT t.[Id], t.[Created], t.[Email], t.[Password] FROM Users t JOIN GamesUsers j ON t.Id = j.UserId WHERE j.GameId = @Id", new SqlParameter("@Id", model.Id)).ToList();
         }
 
         public virtual void AddRelationship(User primary, Game foreign)
@@ -727,7 +736,7 @@ namespace DataAccess
         protected SqlConnection connection;
         public UnitOfWork()
         {
-            connection = new SqlConnection(@"Data Source = .\SQLEXPRESS; Initial Catalog=GameDB; Integrated Security = SSPI;");
+            connection = new SqlConnection(@"Data Source=.\SQLEXPRESS; Initial Catalog=GameDB; Integrated Security = SSPI;");
             connection.Open();
         }
 

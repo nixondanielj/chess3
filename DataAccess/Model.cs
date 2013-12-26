@@ -12,6 +12,7 @@ namespace DataAccess.Model
         public int Id { get; set; }
         public DateTime Created { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
     }
 
     public partial class GameType
@@ -39,6 +40,7 @@ namespace DataAccess.Model
         public DateTime TimeMade { get; set; }
         public string Value { get; set; }
     }
+	
 
 }
 
