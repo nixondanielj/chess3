@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Utility
 {
-    public class Settings
+    public static class Settings
     {
+        public TimeSpan GetAuthExpiration()
+        {
+            return new TimeSpan(7, 0, 0, 0);
+        }
     }
 }
