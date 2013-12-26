@@ -9,8 +9,8 @@ namespace Services
 {
     public interface IGameService
     {
-        public GameStateVM GetGame(int id);
+        GameStateVM GetGame(int id);
 
-        public void Move(MoveFM move);
+        void Move(MoveFM move);
     }
 }
