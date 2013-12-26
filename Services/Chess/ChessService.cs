@@ -7,7 +7,7 @@ using Services.Models;
 using DataAccess.Model;
 using DataAccess;
 
-namespace Services.Concretions
+namespace Services.Chess
 {
     public class ChessService : Service, IGameService
     {

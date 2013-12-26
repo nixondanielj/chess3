@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Model;
 
-namespace Services.Concretions
+namespace Services.Chess
 {
     public class ChessBoardBuilder : IBoardBuilder
     {
