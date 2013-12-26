@@ -25,9 +25,22 @@ namespace Services.Chess
             return vm;
         }
 
+        public void CreateGame(int playerId)
+        {
+
+        }
+
         public void Move(MoveFM move)
         {
-            
+            if (ValidateMove(move))
+            {
+
+            }
+        }
+
+        private bool ValidateMove(MoveFM move)
+        {
+            throw new NotImplementedException();
         }
     }
 }
