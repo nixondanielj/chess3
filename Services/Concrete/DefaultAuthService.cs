@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccess.Model;
 using DataAccess;
 using Services.Models;
+using Utility;
 
 namespace Services.Concrete
 {
@@ -61,7 +62,19 @@ namespace Services.Concrete
             using (var uow = new UnitOfWork())
             {
                 Token token = uow.TokenRepository.GetByKey(key).SingleOrDefault();
-                
+                if (token != null)
+                {
+                    if ((DateTime.Now - token.Issued) > Settings.GetAuthExpiration())
+                    {
+                        throw new ExpiredAuthenticationException();
+                    }
+                    else
+                    {
+                        vm = new AuthenticationVM();
+                        vm.Key = token.Key;
+                        vm.UserId = token.UserId;
+                    }
+                }
             }
             return vm;
         }

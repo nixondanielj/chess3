@@ -8,7 +8,7 @@ namespace Utility
 {
     public static class Settings
     {
-        public TimeSpan GetAuthExpiration()
+        public static TimeSpan GetAuthExpiration()
         {
             return new TimeSpan(7, 0, 0, 0);
         }
