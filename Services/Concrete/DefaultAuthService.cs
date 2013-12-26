@@ -61,7 +61,7 @@ namespace Services.Concrete
             using (var uow = new UnitOfWork())
             {
                 Token token = uow.TokenRepository.GetByKey(key).SingleOrDefault();
-                if()
+                
             }
             return vm;
         }
