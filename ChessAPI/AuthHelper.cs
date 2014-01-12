@@ -13,23 +13,23 @@ namespace ChessAPI
 {
     public class AuthHelper
     {
-        public string GetKey(HttpRequestMessage request)
+        public string GetKey(HttpRequestBase request)
         {
             string sessionId = null;
-            var cookie = request.Headers.GetCookies("sessionId").FirstOrDefault();
+            var cookie = request.Cookies["sessionId"];
             if (cookie != null)
             {
-                sessionId = cookie["sessionId"].Value;
+                sessionId = cookie.Value;
             }
             return sessionId;
         }
 
-        public void SetKey(HttpRequestMessage request, HttpResponseMessage response, string sessionKey)
+        public void SetKey(HttpRequestBase request, HttpResponseBase response, string sessionKey)
         {
-            var cookie = new CookieHeaderValue("sessionId", sessionKey);
-            cookie.Expires = DateTimeOffset.Now.AddMinutes(15);
+            var cookie = new HttpCookie("sessionId", sessionKey);
+            cookie.Expires = DateTime.Now.AddMinutes(15);
             cookie.Path = "/";
-            response.Headers.AddCookies(new CookieHeaderValue[] { cookie });
+            response.SetCookie(cookie);
         }
     }
 }
