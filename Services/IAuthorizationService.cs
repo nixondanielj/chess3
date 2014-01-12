@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Services
 {
     public interface IAuthorizationService
     {
-        public bool Authenticate(string key);
-        public string Authenticate(string email, string password);
+        public AuthenticationVM Authenticate(string key);
+        public AuthenticationVM Authenticate(string email, string password);
     }
 }

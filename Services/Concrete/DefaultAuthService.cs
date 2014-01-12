@@ -26,7 +26,7 @@ namespace Services.Concrete
             return vm;
         }
 
-        private AuthenticationVM AuthByLogin(string email, string password)
+        public AuthenticationVM AuthByLogin(string email, string password)
         {
             AuthenticationVM vm = null;
             using (var uow = new UnitOfWork())
