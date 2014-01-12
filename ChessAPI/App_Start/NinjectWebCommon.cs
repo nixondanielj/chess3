@@ -54,6 +54,7 @@ namespace ChessAPI.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<Services.IAuthorizationService>().To<Services.Concrete.DefaultAuthService>();
+            kernel.Bind<AuthHelper>().To<AuthHelper>();
         }        
     }
 }
