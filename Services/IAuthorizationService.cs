@@ -9,7 +9,6 @@ namespace Services
 {
     public interface IAuthorizationService
     {
-        public AuthenticationVM Authenticate(string key);
-        public AuthenticationVM Authenticate(string email, string password);
+        AuthenticationVM Authenticate(AuthenticationFM fm);
     }
 }

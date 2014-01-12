@@ -26,7 +26,7 @@ namespace ChessAPI
             string sessionId = GetSessionId(request);
             if (sessionId != null)
             {
-                user = authService.Authenticate(sessionId);
+                user = authService.Authenticate(new AuthenticationFM() { Key = sessionId });
             }
             if (user == null)
             {

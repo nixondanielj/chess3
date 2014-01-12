@@ -148,12 +148,8 @@ namespace DataAccess
             ExecuteParamNonQuery("UPDATE Users SET [Created] = @Created, [Email] = @Email, [Password] = @Password WHERE [Id] = @Id", sparams);
         }
 
-        public virtual User GetByGame(Game model)
-        {
-            return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p JOIN Games f ON p.Id = f.TurnPlayerId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
-        }
 
-        public virtual User GetByGame(Game model)
+        public virtual User GetTurnPlayerByGame(Game model)
         {
             return ExecuteParamQuery("SELECT p.[Id], p.[Created], p.[Email], p.[Password] FROM Users p JOIN Games f ON p.Id = f.TurnPlayerId WHERE f.Id = @Id", new SqlParameter("@Id", model.Id)).SingleOrDefault();
         }
@@ -354,21 +350,6 @@ namespace DataAccess
             sparams[4] = new SqlParameter("Ended", model.Ended ?? (object)DBNull.Value);
             sparams[5] = new SqlParameter("@Id", model.Id);
             ExecuteParamNonQuery("UPDATE Games SET [Type] = @Type, [TurnPlayerId] = @TurnPlayerId, [WinnerId] = @WinnerId, [Created] = @Created, [Ended] = @Ended WHERE [Id] = @Id", sparams);
-        }
-
-        public virtual List<Game> GetByUser(User model)
-        {
-            return ExecuteParamQuery("SELECT p.[Id], p.[Type], p.[TurnPlayerId], p.[WinnerId], p.[Created], p.[Ended] FROM Games p WHERE TurnPlayerId = @TurnPlayerId", new SqlParameter("@TurnPlayerId", model.Id)).ToList();
-        }
-
-        public virtual void SetRelationship(User primary, Game foreign)
-        {
-            ExecuteParamNonQuery("UPDATE Games SET TurnPlayerId = @Id WHERE Id = @Id", new SqlParameter("@Id", primary.Id), new SqlParameter("@Id", foreign.Id));
-        }
-
-        public virtual List<Game> GetByUser(User model)
-        {
-            return ExecuteParamQuery("SELECT p.[Id], p.[Type], p.[TurnPlayerId], p.[WinnerId], p.[Created], p.[Ended] FROM Games p WHERE TurnPlayerId = @TurnPlayerId", new SqlParameter("@TurnPlayerId", model.Id)).ToList();
         }
 
         public virtual void SetRelationship(User primary, Game foreign)
