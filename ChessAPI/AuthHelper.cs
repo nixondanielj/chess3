@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Net;
 using Services;
+using System.Net.Http.Headers;
 
 namespace ChessAPI
 {
@@ -16,7 +17,7 @@ namespace ChessAPI
 
         public AuthHelper(IAuthorizationService authService)
         {
-
+            this.authService = authService;
         }
 
         public AuthenticationVM Authenticate(HttpRequestMessage request)
