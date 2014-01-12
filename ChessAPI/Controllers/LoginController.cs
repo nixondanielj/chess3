@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace ChessAPI.Controllers
 {
-    public class LoginController : ApiController
+    public class LoginController : BaseAPIController
     {
         private IAuthorizationService authService;
         private AuthHelper helper;
@@ -22,9 +22,11 @@ namespace ChessAPI.Controllers
         // POST api/<controller>
         public void Post(AuthenticationFM credentials)
         {
-            string key = authService.Authenticate(credentials).Key;
-            var context = new HttpContextWrapper(HttpContext.Current);
-            helper.SetKey(context.Request, context.Response, key);
+            var result = authService.Authenticate(credentials);
+            if (result != null)
+            {
+                helper.SetKey(Request, Response, result.Key);
+            }
         }
     }
 }
