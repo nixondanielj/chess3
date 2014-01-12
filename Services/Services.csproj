@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Extensions">
-      <HintPath>..\..\Utility\LatestBuild\Extensions.dll</HintPath>
+      <HintPath>..\Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
@@ -44,7 +44,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UtilityAbstractions">
-      <HintPath>..\..\Utility\LatestBuild\UtilityAbstractions.dll</HintPath>
+      <HintPath>..\UtilityAbstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

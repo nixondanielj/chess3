@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Extensions">
-      <HintPath>..\..\Utility\LatestBuild\Extensions.dll</HintPath>
+      <HintPath>..\Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
@@ -115,7 +115,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0-rc1\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="UtilityAbstractions">
-      <HintPath>..\..\Utility\LatestBuild\UtilityAbstractions.dll</HintPath>
+      <HintPath>..\UtilityAbstractions.dll</HintPath>
     </Reference>
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll</HintPath>
