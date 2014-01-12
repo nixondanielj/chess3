@@ -15,7 +15,7 @@ namespace ChessAPI.Controllers
         }
         public ActionResult Index()
         {
-            authHelper.SetSessionCookie(Request, Response, "a");
+            authHelper.SetKey(Request, Response, "a");
             return View();
         }
     }
