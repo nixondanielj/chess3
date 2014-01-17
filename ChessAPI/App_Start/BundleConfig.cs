@@ -24,6 +24,9 @@ namespace ChessAPI
             bundles.Add(
                 new Bundle("~/bundles/controllers").IncludeDirectory("~/client/controllers", "*.js")
                 );
+            bundles.Add(
+                new Bundle("~/bundles/services").IncludeDirectory("~/client/services", "*.js")
+                );
         }
     }
 }

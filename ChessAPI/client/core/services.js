@@ -1,0 +1,1 @@
+﻿var chessServices = angular.module('chessServices', ['ngResource']);
