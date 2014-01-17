@@ -4,7 +4,7 @@ chessApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
             .when('/login', {
-                templateUrl: 'partials/login.html',
+                templateUrl: 'client/partials/login.html',
                 controller: 'LoginCtrl'
             })
             .when('/chess', {
@@ -12,7 +12,7 @@ chessApp.config(['$routeProvider',
                 controller: 'ChessCtrl'
             })
             .otherwise({
-                redirectTo: '/chess'
+                redirectTo: '/login'
             });
     }
 ]);
