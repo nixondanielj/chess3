@@ -148,6 +148,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="client\controllers\ChessCtrl.js" />
+    <Content Include="client\controllers\LoginCtrl.js" />
+    <Content Include="client\core\app.js" />
+    <Content Include="client\core\controllers.js" />
+    <Content Include="client\models\AuthenticationFM.js" />
+    <Content Include="client\partials\chess.html" />
+    <Content Include="client\partials\login.html" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -159,7 +166,7 @@
     <Content Include="img\glyphicons-halflings-white.png" />
     <Content Include="img\glyphicons-halflings.png" />
     <Content Include="img\pieces.png" />
-    <Content Include="client\index.html" />
+    <None Include="client\index.cshtml" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
