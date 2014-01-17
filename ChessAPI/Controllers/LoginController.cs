@@ -21,13 +21,16 @@ namespace ChessAPI.Controllers
         }
 
         // POST api/<controller>
-        public void Post(AuthenticationFM credentials)
+        public HttpResponseMessage Post(AuthenticationFM credentials)
         {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Forbidden);
             var result = authService.Authenticate(credentials);
             if (result != null)
             {
                 helper.SetKey(Request, Response, result.Key);
+                response.StatusCode = HttpStatusCode.OK;
             }
+            return response;
         }
     }
 }
