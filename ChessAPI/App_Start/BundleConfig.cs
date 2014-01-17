@@ -12,7 +12,8 @@ namespace ChessAPI
                 new Bundle("~/bundles/angular")
                     .Include(
                         "~/Scripts/angular.js",
-                        "~/Scripts/angular-route.js"
+                        "~/Scripts/angular-route.js",
+                        "~/Scripts/angular-resource.js"
                     )
                 );
             bundles.Add(

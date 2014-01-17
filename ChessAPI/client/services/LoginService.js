@@ -2,4 +2,4 @@
     function ($resource) {
         return $resource('Login', {}, {});
     }
-])
+]);

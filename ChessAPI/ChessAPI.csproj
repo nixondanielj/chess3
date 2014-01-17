@@ -153,9 +153,11 @@
     <Content Include="client\controllers\LoginCtrl.js" />
     <Content Include="client\core\app.js" />
     <Content Include="client\core\controllers.js" />
+    <Content Include="client\core\services.js" />
     <Content Include="client\models\AuthenticationFM.js" />
     <Content Include="client\partials\chess.html" />
     <Content Include="client\partials\login.html" />
+    <Content Include="client\services\LoginService.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />

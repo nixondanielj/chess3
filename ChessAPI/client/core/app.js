@@ -1,4 +1,4 @@
-﻿var chessApp = angular.module('chessApp', ['ngRoute', 'chessControllers']);
+﻿var chessApp = angular.module('chessApp', ['ngRoute', 'chessControllers', 'chessServices']);
 
 chessApp.config(['$routeProvider',
     function ($routeProvider) {
