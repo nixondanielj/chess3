@@ -1,12 +1,18 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html ng-app xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Home</title>
 </head>
 <body>
     <div ng-view></div>
-    <script src="core/app.js"></script>
-    <script src="core/controllers.js"></script>
-
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/core")
+    @Scripts.Render("~/bundles/models")
+    @Scripts.Render("~/bundles/controllers")
 </body>
 </html>

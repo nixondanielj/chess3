@@ -8,7 +8,22 @@ namespace ChessAPI
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            
+            bundles.Add(
+                new Bundle("~/bundles/angular")
+                    .Include(
+                        "~/Scripts/angular.js",
+                        "~/Scripts/angular-route.js"
+                    )
+                );
+            bundles.Add(
+                new Bundle("~/bundles/core").IncludeDirectory("~/client/core", "*.js")
+                );
+            bundles.Add(
+                new Bundle("~/bundles/models").IncludeDirectory("~/client/models", "*.js")
+                );
+            bundles.Add(
+                new Bundle("~/bundles/controllers").IncludeDirectory("~/client/controllers", "*.js")
+                );
         }
     }
 }
