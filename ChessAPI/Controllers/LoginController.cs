@@ -19,6 +19,7 @@ namespace ChessAPI.Controllers
             this.helper = helper;
             this.authService = authService;
         }
+
         // POST api/<controller>
         public void Post(AuthenticationFM credentials)
         {
