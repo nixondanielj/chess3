@@ -4,7 +4,7 @@ chessApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
             .when('/chess', {
-                templateUrl: 'holdon',
+                templateUrl: 'partials/chess.html',
                 controller: 'chessController'
             })
             .otherwise({
