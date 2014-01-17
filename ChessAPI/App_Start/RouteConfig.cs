@@ -14,7 +14,8 @@ namespace ChessAPI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
                 name: "Default",
-                url: "client/index.html"
+                url: "{anything}",
+                defaults: new { controller = "Home", action = "Index" }
             );
         }
     }
