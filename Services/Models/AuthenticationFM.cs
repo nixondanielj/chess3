@@ -11,5 +11,15 @@ namespace Services.Models
         public string Key { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public AuthenticationFM()
+        {
+
+        }
+
+        public AuthenticationFM(string key)
+        {
+            this.Key = key;
+        }
     }
 }
