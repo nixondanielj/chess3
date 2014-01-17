@@ -1,5 +1,5 @@
 ﻿chessServices.factory('Login', ['$resource',
     function ($resource) {
-        return $resource('Login', {}, {});
+        return $resource('api/Login', {}, {});
     }
 ]);
