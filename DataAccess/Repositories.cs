@@ -808,7 +808,7 @@ namespace DataAccess
         protected SqlConnection connection;
         public UnitOfWork()
         {
-            connection = new SqlConnection(@"Data Source = .\SQLEXPRESS; Initial Catalog = GameDB; Integrated Security = SSPI;");
+            connection = new SqlConnection(@"Data Source = localhost; Initial Catalog = GameDB; Integrated Security = SSPI;");
             connection.Open();
         }
 
