@@ -495,8 +495,8 @@ namespace DataAccess
         { }
         public virtual void Create(Token model)
         {
-            string text = "INSERT INTO Tokens ([UserId], [Issued]) VALUES(@UserId, @Issued)";
-            ExecuteParamNonQuery(text, new SqlParameter("@UserId", model.UserId), new SqlParameter("@Issued", model.Issued));
+            string text = "INSERT INTO Tokens ([UserId], [Issued], [Key]) VALUES(@UserId, @Issued, @Key)";
+            ExecuteParamNonQuery(text, new SqlParameter("@UserId", model.UserId), new SqlParameter("@Issued", model.Issued), new SqlParameter("@Key", model.Key));
         }
 
         public virtual List<Token> GetByUserId(int val)

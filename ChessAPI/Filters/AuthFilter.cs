@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using Ninject;
+using Services;
 using Services.Models;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,8 @@ namespace ChessAPI.Filters
 {
     public class AuthFilter : AuthorizeAttribute
     {
-        private IAuthorizationService authService;
-
-        public AuthFilter(IAuthorizationService authService)
-            : base()
-        {
-            this.authService = authService;
-        }
+        [Inject]
+        public IAuthorizationService authService { get; set; }
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {

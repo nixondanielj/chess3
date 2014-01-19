@@ -49,6 +49,7 @@ namespace Services.Concrete
             Token token = new Token();
             token.Key = Guid.NewGuid().ToString();
             token.UserId = user.Id;
+            token.Issued = DateTime.Now;
             using (var uow = new UnitOfWork())
             {
                 uow.TokenRepository.Create(token);
