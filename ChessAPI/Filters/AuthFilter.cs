@@ -1,28 +1,24 @@
-﻿using Ninject;
-using Services;
-using Services.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 
 namespace ChessAPI.Filters
 {
-    public class AuthFilter : AuthorizeAttribute
+    public class AuthorizationFilter : IActionFilter
     {
-        [Inject]
-        public IAuthorizationService authService { get; set; }
 
-        public override void OnAuthorization(HttpActionContext actionContext)
+        public Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
         {
-            var context = new HttpContextWrapper(HttpContext.Current);
-            string key = new AuthHelper().GetKey(context.Request);
-            if (key == null || authService.Authenticate(new AuthenticationFM(key)) == null)
-            {
-                throw new HttpResponseException(System.Net.HttpStatusCode.Forbidden);
-            }
+
+        }
+
+        public bool AllowMultiple
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }
